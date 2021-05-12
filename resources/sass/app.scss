@@ -1,0 +1,123 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+*,
+label {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.app-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(
+        to bottom,
+        #5e9dfd,
+        #4b84e4,
+        #376ccc,
+        #2255b3,
+        #043f9b
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 310px;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 10px 35px;
+    position: relative;
+
+    &.v-center {
+        justify-content: center;
+    }
+
+    h2,
+    h3 {
+        font-weight: bold;
+        text-align: center;
+
+        &.title {
+            margin-bottom: 18px;
+            line-height: 35px;
+        }
+    }
+
+    .app-body,
+    .app-footer {
+        width: 100%;
+    }
+
+    .app-footer {
+        .footer-btn,
+        .footer-btn-lite {
+            display: block;
+            background-color: #fff;
+            color: #252d48;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 8px 16px 7px;
+            text-align: center;
+            border-radius: 30px;
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+
+            &:hover,
+            &:focus {
+                background-color: darken(#fff, 5);
+            }
+        }
+
+        .footer-btn-lite {
+            background-color: #4170ba;
+            color: #fff;
+            font-weight: 500;
+
+            &:hover,
+            &:focus {
+                background-color: darken(#4170ba, 5);
+            }
+        }
+    }
+}
+
+.text-card {
+    background-color: #dde7fd;
+    padding: 10px 15px 9px;
+    color: #252d48;
+    font-size: 1.1em;
+    line-height: 22px;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-bottom: 12px;
+
+    &.t-sm {
+        font-size: .92em;
+        line-height: 18px;
+        padding: 10px 12px 9px;
+    }
+}
+
+
+.fade-enter-active {
+    transition: opacity .5s;
+  }
+  .fade-enter  /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
