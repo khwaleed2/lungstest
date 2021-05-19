@@ -10021,13 +10021,13 @@ label {
 .app-container {
   width: 100%;
   max-width: 310px;
-  min-height: 100vh;
+  height: 100vh;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 10px 35px;
+  padding: 30px 10px 30px;
   position: relative;
 }
 .app-container.v-center {
@@ -10098,4 +10098,22 @@ label {
 
 .fade-enter {
   opacity: 0;
+}
+
+@media screen and (max-width: 309px) {
+  .app-container h2 {
+    font-size: 24px;
+  }
+  .app-container h3 {
+    font-size: 20px;
+  }
+
+  .text-card {
+    font-size: 1em;
+    line-height: 20px;
+  }
+  .text-card.t-sm {
+    font-size: 0.82em;
+    line-height: 16px;
+  }
 }

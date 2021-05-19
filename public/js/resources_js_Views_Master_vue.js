@@ -218,6 +218,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "begin",
   data: function data() {
@@ -226,10 +249,8 @@ __webpack_require__.r(__webpack_exports__);
       start: false,
       inhale: false,
       inhaleComplete: false,
-      inhaleDuration: 3,
       holdBreath: false,
       progress: 80,
-      holdBreathDuration: 6,
       done: false,
       stopProgress: false,
       "int": null,
@@ -239,6 +260,15 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     getTryAgain: function getTryAgain() {
       return this.$store.getters.getTryAgain;
+    },
+    inhaleDuration: function inhaleDuration() {
+      return this.$store.getters.getData.resultData.inhale_dura;
+    },
+    holdBreathDuration: function holdBreathDuration() {
+      return this.$store.getters.getData.resultData.hold_dura;
+    },
+    results: function results() {
+      return this.$store.getters.getData.result;
     }
   },
   watch: {
@@ -265,13 +295,17 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         _this.holdBreath = true;
       }, 1000);
+      setTimeout(function () {
+        _this.startTiming();
+      }, 2000);
     },
     startTiming: function startTiming() {
       var _this2 = this;
 
       this["int"] = setInterval(function () {
-        if (_this2.holdBreathDuration >= _this2.time) {
+        if (_this2.holdBreathDuration > _this2.time) {
           _this2.time = ++_this2.time;
+          console.log(_this2.time);
         } else {
           _this2.stopTiming();
         }
@@ -283,6 +317,30 @@ __webpack_require__.r(__webpack_exports__);
       clearInterval(this["int"]);
       this.done = true;
       this.stopProgress = true;
+      var res = null;
+      this.results.forEach(function (r) {
+        if (r.conditions === "before" && res === null) {
+          if (_this3.time <= r.seconds) {
+            res = {
+              result: r.result,
+              critical: r.critical
+            };
+
+            _this3.$store.commit("setResult", res);
+          }
+        }
+
+        if (r.conditions === "after" && res === null) {
+          if (_this3.time > r.seconds) {
+            res = {
+              result: r.result,
+              critical: r.critical
+            };
+
+            _this3.$store.commit("setResult", res);
+          }
+        }
+      });
       setTimeout(function () {
         _this3.$router.push({
           name: "result"
@@ -300,8 +358,6 @@ __webpack_require__.r(__webpack_exports__);
             _this4.inhale = true;
             setTimeout(function () {
               _this4.stopInhale();
-
-              _this4.startTiming();
             }, _this4.inhaleDuration * 1000);
           }
 
@@ -318,12 +374,10 @@ __webpack_require__.r(__webpack_exports__);
       this.inhale = false;
       this.inhaleComplete = false;
       this.holdBreath = false;
-      this.holdBreathDuration = 6;
       this.done = false;
       this.stopProgress = false;
       this["int"] = null;
       this.time = 0;
-      console.log("asdadasd wroking");
       setTimeout(function () {
         _this5.$store.commit("setTryAgain", false);
 
@@ -385,29 +439,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "disclaimer"
+  name: "disclaimer",
+  data: function data() {
+    return {
+      disclaimers: [],
+      cardText: ""
+    };
+  },
+  created: function created() {
+    this.getDisclaimers();
+  },
+  methods: {
+    getDisclaimers: function getDisclaimers() {
+      var _this = this;
+
+      axios({
+        url: "disclaimers",
+        method: "GET"
+      }).then(function (res) {
+        console.log(res.data);
+        _this.disclaimers = res.data.disclaimers;
+        _this.cardText = res.data.DisclaimerCardText.text;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -423,6 +481,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -506,7 +570,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.play-btn[data-v-1ef94040] {\n  width: 115px;\n  height: 115px;\n  border: 0px;\n  border-radius: 100%;\n  margin: 90px auto 0px;\n  background-color: #5f90dc;\n  color: #fff;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.play-btn i[data-v-1ef94040] {\n  font-size: 38px;\n  margin-left: 10px;\n}\n.play-btn .count-dwon[data-v-1ef94040] {\n  font-size: 46px;\n  font-weight: 600;\n}\n.play-btn .text[data-v-1ef94040] {\n  font-size: 15px;\n  font-weight: 600;\n}\n.play-btn.inhale[data-v-1ef94040] {\n  -webkit-animation: inhale-data-v-1ef94040 linear;\n          animation: inhale-data-v-1ef94040 linear;\n  transform: scale(1.65);\n}\n@-webkit-keyframes inhale-data-v-1ef94040 {\nfrom {\n    transform: scale(0.5);\n}\nto {\n    transform: scale(1.75);\n}\n}\n@keyframes inhale-data-v-1ef94040 {\nfrom {\n    transform: scale(0.5);\n}\nto {\n    transform: scale(1.75);\n}\n}\n.min-h-105[data-v-1ef94040] {\n  min-height: 105px;\n}\n.hold-breath-counter[data-v-1ef94040] {\n  width: 100%;\n  max-width: 233px;\n  margin: 60px auto 0px;\n  position: relative;\n}\n.hold-breath-counter .stop-btn[data-v-1ef94040] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-54.1%, -50%);\n  width: 110px;\n  height: 110px;\n  background-color: #5a8bd7;\n  color: #fff;\n  border: 0px;\n  border-radius: 100%;\n  font-size: 15px;\n  padding: 0px 15px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  line-height: 18px;\n  cursor: pointer;\n  z-index: 9;\n}\n.hold-breath-counter span[data-v-1ef94040] {\n  font-size: 21px;\n  font-weight: 600;\n  position: absolute;\n  top: 50%;\n  left: 48.5%;\n  transform: translate(-50%, -50%);\n  z-index: 9;\n  width: 100%;\n  max-width: 152px;\n}\n.retry-btn[data-v-1ef94040] {\n  position: absolute;\n  bottom: 36px;\n  left: 50%;\n  transform: translateX(-50%);\n  color: #fff;\n  text-decoration: none;\n  font-size: 18px;\n}\n.analyzing[data-v-1ef94040] {\n  font-size: 32px;\n  font-weight: 600;\n  margin: 40px auto 0px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.analyzing[data-v-1ef94040]::after {\n  overflow: hidden;\n  display: inline-block;\n  letter-spacing: 10px;\n  vertical-align: bottom;\n  -webkit-animation: ellipsis-data-v-1ef94040 steps(4, end) 2500ms infinite;\n          animation: ellipsis-data-v-1ef94040 steps(4, end) 2500ms infinite;\n  content: \"…\";\n  /* ascii code for the ellipsis character */\n  width: 0px;\n}\nsvg#cus[data-v-1ef94040] {\n  transform: rotateY(-360deg) rotateZ(-90deg);\n}\nsvg#cus.pause g#circle_2 circle[data-v-1ef94040] {\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\nsvg#cus g#circle_2 circle[data-v-1ef94040] {\n  stroke-dasharray: 592px;\n  stroke-dashoffset: 0px;\n  stroke-linecap: round;\n  stroke-width: 9px;\n  -webkit-animation: countdown-data-v-1ef94040 linear forwards;\n          animation: countdown-data-v-1ef94040 linear forwards;\n}\n@-webkit-keyframes countdown-data-v-1ef94040 {\nfrom {\n    stroke-dashoffset: 0px;\n}\nto {\n    stroke-dashoffset: 592px;\n}\n}\n@keyframes countdown-data-v-1ef94040 {\nfrom {\n    stroke-dashoffset: 0px;\n}\nto {\n    stroke-dashoffset: 592px;\n}\n}\n@-webkit-keyframes ellipsis-data-v-1ef94040 {\nto {\n    width: 0.945em;\n}\n}\n@keyframes ellipsis-data-v-1ef94040 {\nto {\n    width: 0.945em;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.play-btn[data-v-1ef94040] {\n  width: 115px;\n  height: 115px;\n  border: 0px;\n  border-radius: 100%;\n  margin: 90px auto 0px;\n  background-color: #5f90dc;\n  color: #fff;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.play-btn i[data-v-1ef94040] {\n  font-size: 38px;\n  margin-left: 10px;\n}\n.play-btn .count-dwon[data-v-1ef94040] {\n  font-size: 46px;\n  font-weight: 600;\n}\n.play-btn .text[data-v-1ef94040] {\n  font-size: 15px;\n  font-weight: 600;\n}\n.play-btn.inhale[data-v-1ef94040] {\n  -webkit-animation: inhale-data-v-1ef94040 linear;\n          animation: inhale-data-v-1ef94040 linear;\n  transform: scale(1.65);\n}\n@-webkit-keyframes inhale-data-v-1ef94040 {\nfrom {\n    transform: scale(0.5);\n}\nto {\n    transform: scale(1.75);\n}\n}\n@keyframes inhale-data-v-1ef94040 {\nfrom {\n    transform: scale(0.5);\n}\nto {\n    transform: scale(1.75);\n}\n}\n.min-h-105[data-v-1ef94040] {\n  min-height: 105px;\n}\n.hold-breath-counter[data-v-1ef94040] {\n  width: 100%;\n  max-width: 233px;\n  margin: 60px auto 0px;\n  position: relative;\n}\n.hold-breath-counter .stop-btn[data-v-1ef94040] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-54.1%, -50%);\n  width: 110px;\n  height: 110px;\n  background-color: #5a8bd7;\n  color: #fff;\n  border: 0px;\n  border-radius: 100%;\n  font-size: 15px;\n  padding: 0px 15px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  line-height: 18px;\n  cursor: pointer;\n  z-index: 9;\n}\n.hold-breath-counter span[data-v-1ef94040] {\n  font-size: 21px;\n  font-weight: 600;\n  position: absolute;\n  top: 50%;\n  left: 48.5%;\n  transform: translate(-50%, -50%);\n  z-index: 9;\n  width: 100%;\n  max-width: 152px;\n}\n.retry-btn[data-v-1ef94040] {\n  position: absolute;\n  bottom: 36px;\n  left: 50%;\n  transform: translateX(-50%);\n  color: #fff;\n  text-decoration: none;\n  font-size: 18px;\n}\n.analyzing[data-v-1ef94040] {\n  font-size: 32px;\n  font-weight: 600;\n  margin: 40px auto 0px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.analyzing[data-v-1ef94040]::after {\n  overflow: hidden;\n  display: inline-block;\n  letter-spacing: 10px;\n  vertical-align: bottom;\n  -webkit-animation: ellipsis-data-v-1ef94040 steps(4, end) 2500ms infinite;\n          animation: ellipsis-data-v-1ef94040 steps(4, end) 2500ms infinite;\n  content: \"…\";\n  /* ascii code for the ellipsis character */\n  width: 0px;\n}\nsvg#cus[data-v-1ef94040] {\n  transform: rotateY(-360deg) rotateZ(-90deg);\n}\nsvg#cus.pause g#circle_2 circle[data-v-1ef94040] {\n  -webkit-animation-play-state: paused;\n          animation-play-state: paused;\n}\nsvg#cus g#circle_2 circle[data-v-1ef94040] {\n  stroke-dasharray: 592px;\n  stroke-dashoffset: 0px;\n  stroke-linecap: round;\n  stroke-width: 9px;\n  -webkit-animation: countdown-data-v-1ef94040 linear forwards;\n          animation: countdown-data-v-1ef94040 linear forwards;\n}\n@-webkit-keyframes countdown-data-v-1ef94040 {\nfrom {\n    stroke-dashoffset: 0px;\n}\nto {\n    stroke-dashoffset: 592px;\n}\n}\n@keyframes countdown-data-v-1ef94040 {\nfrom {\n    stroke-dashoffset: 0px;\n}\nto {\n    stroke-dashoffset: 592px;\n}\n}\n@-webkit-keyframes ellipsis-data-v-1ef94040 {\nto {\n    width: 0.945em;\n}\n}\n@keyframes ellipsis-data-v-1ef94040 {\nto {\n    width: 0.945em;\n}\n}\n@media screen and (max-width: 309px) {\n.hold-breath-counter .stop-btn[data-v-1ef94040] {\n    font-size: 14px;\n}\n.hold-breath-counter span[data-v-1ef94040] {\n    font-size: 18px;\n    max-width: 135px;\n}\n.analyzing[data-v-1ef94040] {\n    font-size: 28px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -530,7 +594,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".disclaimer-list[data-v-caefe618] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  height: calc(100vh - 350px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.disclaimer-list[data-v-caefe618]::-webkit-scrollbar {\n  display: none;\n}\n.disclaimer-list li[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.footer-card[data-v-caefe618] {\n  width: 100%;\n  background-color: #2b60b5;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 12px;\n  border-radius: 15px;\n}\n.footer-card .card-info[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-info .card-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.footer-card .card-actions .switch-btn[data-v-caefe618] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-actions .switch-btn input[data-v-caefe618] {\n  display: none;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618] {\n  background-color: #629efe;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618]::before {\n  transform: translateX(21px);\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618] {\n  position: relative;\n  display: inline-block;\n  width: 45px;\n  height: 25px;\n  background-color: #797c9b;\n  border-radius: 40px;\n  transition: all 0.3s;\n  cursor: pointer;\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 25px;\n  height: 25px;\n  background-color: #fff;\n  border-radius: 100%;\n  transition: all 0.3s;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".disclaimer-list[data-v-caefe618] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  height: calc(100vh - 350px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.disclaimer-list[data-v-caefe618]::-webkit-scrollbar {\n  display: none;\n}\n.disclaimer-list li[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n  width: 100%;\n  max-width: 15px;\n}\n.footer-card[data-v-caefe618] {\n  width: 100%;\n  background-color: #2b60b5;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 12px;\n  border-radius: 15px;\n}\n.footer-card .card-info[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-info .card-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.footer-card .card-actions .switch-btn[data-v-caefe618] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-actions .switch-btn input[data-v-caefe618] {\n  display: none;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618] {\n  background-color: #629efe;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618]::before {\n  transform: translateX(21px);\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618] {\n  position: relative;\n  display: inline-block;\n  width: 45px;\n  height: 25px;\n  background-color: #797c9b;\n  border-radius: 40px;\n  transition: all 0.3s;\n  cursor: pointer;\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 25px;\n  height: 25px;\n  background-color: #fff;\n  border-radius: 100%;\n  transition: all 0.3s;\n}\n@media screen and (max-width: 309px) {\n.disclaimer-list li[data-v-caefe618] {\n    font-size: 14px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n    width: 30px;\n    height: 30px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n    max-width: 12px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -554,7 +618,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".steps[data-v-b8f47dbc] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  max-height: calc(100vh - 272px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.steps[data-v-b8f47dbc]::-webkit-scrollbar {\n  display: none;\n}\n.steps .step[data-v-b8f47dbc] {\n  color: #fff;\n  font-size: 20px;\n  font-weight: 600;\n  margin-bottom: 20px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".steps[data-v-b8f47dbc] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  max-height: calc(100vh - 272px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.steps[data-v-b8f47dbc]::-webkit-scrollbar {\n  display: none;\n}\n.steps .step[data-v-b8f47dbc] {\n  color: #fff;\n  font-size: 20px;\n  font-weight: 600;\n  margin-bottom: 20px;\n}\n@media screen and (max-width: 309px) {\n.steps .step[data-v-b8f47dbc] {\n    font-size: 18px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1109,7 +1173,7 @@ var render = function() {
                 _vm.start === false
                   ? _c("span", [
                       _vm._v(
-                        "Tap start and be ready to take a deep breath and don't breath after\n          that\n        "
+                        "Tap start and be ready to take a deep breath and don't\n                    breath after that\n                "
                       )
                     ])
                   : _vm._e(),
@@ -1118,7 +1182,7 @@ var render = function() {
                   _vm.start === true && _vm.inhale === false
                     ? _c("span", [
                         _vm._v(
-                          "\n            Be ready to take a deep breath and don't breath after that\n          "
+                          "\n                        Be ready to take a deep breath and don't breath\n                        after that\n                    "
                         )
                       ])
                     : _vm._e()
@@ -1129,9 +1193,11 @@ var render = function() {
                   _vm.inhaleComplete === false &&
                   _vm.holdBreath === false
                     ? _c("span", [
-                        _vm._v("\n            Take a slow, "),
+                        _vm._v("\n                        Take a slow, "),
                         _c("br"),
-                        _vm._v("\n            deep breath\n          ")
+                        _vm._v(
+                          "\n                        deep breath\n                    "
+                        )
                       ])
                     : _vm._e()
                 ]),
@@ -1140,7 +1206,7 @@ var render = function() {
                   _vm.holdBreath && _vm.done === false
                     ? _c("span", [
                         _vm._v(
-                          "\n            Don't beathe out! Try to hold your breath as long as you can\n          "
+                          "\n                        Don't beathe out! Try to hold your breath as long as\n                        you can\n                    "
                         )
                       ])
                     : _vm._e()
@@ -1179,7 +1245,7 @@ var render = function() {
                       ? _c("span", { staticClass: "text" }, [
                           _vm._v("And "),
                           _c("br"),
-                          _vm._v("\n          STOP")
+                          _vm._v("\n                    STOP")
                         ])
                       : _vm._e()
                   ]
@@ -1198,7 +1264,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n            Tap only if you inhale again\n          "
+                              "\n                        Tap only if you inhale again\n                    "
                             )
                           ]
                         )
@@ -1377,96 +1443,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "app-wrapper", attrs: { "data-hash": "disclaimer" } },
+    [
+      _c("div", { staticClass: "app-container" }, [
+        _c("div", { staticClass: "app-body" }, [
+          _c("h2", { staticClass: "title" }, [_vm._v("Disclaimer")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-card" }, [
+            _vm._v(
+              "\n                " + _vm._s(_vm.cardText) + "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "disclaimer-list" },
+            [
+              _vm._l(_vm.disclaimers, function(item, index) {
+                return [
+                  _c("li", { key: index }, [
+                    _c("i", { staticClass: "list-icon" }, [
+                      _c("img", { attrs: { src: item.icon } })
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(item.text))])
+                  ])
+                ]
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "app-wrapper", attrs: { "data-hash": "disclaimer" } },
-      [
-        _c("div", { staticClass: "app-container" }, [
-          _c("div", { staticClass: "app-body" }, [
-            _c("h2", { staticClass: "title" }, [_vm._v("Disclaimer")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-card" }, [
-              _vm._v(
-                "\n        To ensure that your mesurements are as accurate as possible, we need\n        to make sure that you:\n      "
-              )
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "disclaimer-list" }, [
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("have not smoked or drank alcohol")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("don't have any lung conditions")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("don't have any diseases of the blood")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("don't have astama")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("don't have any chronic diseases")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("didn't play sports in the past 1 hour")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "list-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("feel no stess right now")])
-              ])
-            ])
-          ]),
+    return _c("div", { staticClass: "app-footer" }, [
+      _c("div", { staticClass: "footer-card" }, [
+        _c("div", { staticClass: "card-info" }, [
+          _c("i", { staticClass: "card-icon" }),
           _vm._v(" "),
-          _c("div", { staticClass: "app-footer" }, [
-            _c("div", { staticClass: "footer-card" }, [
-              _c("div", { staticClass: "card-info" }, [
-                _c("i", { staticClass: "card-icon" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("I'm a smoker")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-actions" }, [
-                _c("label", { staticClass: "switch-btn" }, [
-                  _c("input", { attrs: { type: "checkbox" } }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "switch" })
-                ])
-              ])
-            ]),
+          _c("span", [_vm._v("I'm a smoker")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-actions" }, [
+          _c("label", { staticClass: "switch-btn" }, [
+            _c("input", { attrs: { type: "checkbox" } }),
             _vm._v(" "),
-            _c("a", { staticClass: "footer-btn", attrs: { href: "#howto" } }, [
-              _vm._v("Confirm")
-            ])
+            _c("span", { staticClass: "switch" })
           ])
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "footer-btn", attrs: { href: "#howto" } }, [
+        _vm._v("Confirm")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -1505,12 +1546,16 @@ var staticRenderFns = [
         _c("div", { staticClass: "app-container" }, [
           _c("div", { staticClass: "app-body" }, [
             _c("h2", { staticClass: "title" }, [
-              _vm._v("How to take your blood oxygen level spread")
+              _vm._v(
+                "\n                How to take your blood oxygen level spread\n            "
+              )
             ]),
             _vm._v(" "),
             _c("ul", { staticClass: "steps" }, [
               _c("li", { staticClass: "step" }, [
-                _vm._v("1. Go to the next screen and follow the prompts")
+                _vm._v(
+                  "\n                    1. Go to the next screen and follow the prompts\n                "
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "step" }, [_vm._v("2. take one breath")]),
@@ -1520,7 +1565,9 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "step" }, [
-                _vm._v("4. Try not to inhale for as long as posible")
+                _vm._v(
+                  "\n                    4. Try not to inhale for as long as posible\n                "
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "step" }, [

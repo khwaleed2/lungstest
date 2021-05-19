@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
+        "axios": "^0.21.1",
         "bootstrap": "^4.6.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
@@ -29,6 +29,9 @@
         "vue-owl-carousel": "^2.0.3",
         "vue-page-transition": "^0.2.2",
         "vue-router": "^3.5.1",
-        "vuex": "^3.6.2"
+        "vue-social-sharing": "^3.0.7",
+        "vue-the-mask": "^0.11.1",
+        "vuex": "^3.6.2",
+        "vuex-persistedstate": "*"
     }
 }
