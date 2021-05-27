@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Result;
 use App\Models\ResultData;
+use App\Models\SocialShare;
 use Illuminate\Http\Response;
 
 
@@ -14,10 +15,12 @@ class ResultsController extends Controller
     {
         $Result = Result::get();
         $ResultData = ResultData::first();
+        $ShareList = SocialShare::get();
 
         return response([
             'result' => $Result,
             'resultData' => $ResultData,
+            'ShareList' => $ShareList,
         ]);
     }
 

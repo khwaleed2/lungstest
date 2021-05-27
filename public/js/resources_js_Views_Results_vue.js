@@ -171,11 +171,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "result",
   data: function data() {
     return {
       show: false,
+      more: false,
       results: [],
       inhale_dura: null,
       hold_dura: null,
@@ -204,6 +213,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     f_result: function f_result() {
       return this.$store.getters.getResult;
+    },
+    shareList: function shareList() {
+      return this.$store.getters.getData.ShareList;
     }
   },
   methods: {
@@ -225,7 +237,6 @@ __webpack_require__.r(__webpack_exports__);
         url: "get-metaData",
         method: "GET"
       }).then(function (res) {
-        console.log(res.data.metaData);
         _this3.meta.title = res.data.metaData.title;
         _this3.meta.url = res.data.metaData.url;
         _this3.meta.description = res.data.metaData.description;
@@ -256,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".result[data-v-3223b5f2] {\n  width: 100%;\n  max-width: 159px;\n  margin: 10% auto 0px;\n  position: relative;\n}\n.result .danger[data-v-3223b5f2] {\n  position: absolute;\n  top: 33px;\n  left: 50%;\n  transform: translateX(-50%);\n  color: #ec4141;\n  font-size: 1.2rem;\n  z-index: 9;\n}\n.result .text[data-v-3223b5f2] {\n  z-index: 9;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -39%);\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-size: 18px;\n  line-height: 23px;\n}\n.result .text .lite[data-v-3223b5f2] {\n  font-size: 16px;\n  color: rgba(255, 255, 255, 0.8);\n}\n.min-h-70[data-v-3223b5f2] {\n  min-height: 70px;\n}\nsvg[data-v-3223b5f2] {\n  transform: rotateY(-360deg) rotateZ(-90deg);\n}\nsvg g#circle_3 circle[data-v-3223b5f2] {\n  stroke-dasharray: 400px;\n  stroke-dashoffset: 0px;\n  stroke-linecap: round;\n  stroke-width: 9px;\n  -webkit-animation: countdown-data-v-3223b5f2 1.4s linear forwards;\n          animation: countdown-data-v-3223b5f2 1.4s linear forwards;\n}\n@-webkit-keyframes countdown-data-v-3223b5f2 {\nfrom {\n    stroke-dashoffset: 400px;\n}\nto {\n    stroke-dashoffset: 0px;\n}\n}\n@keyframes countdown-data-v-3223b5f2 {\nfrom {\n    stroke-dashoffset: 400px;\n}\nto {\n    stroke-dashoffset: 0px;\n}\n}\n.social-share[data-v-3223b5f2] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.social-share a[data-v-3223b5f2] {\n  color: #fff;\n  margin: 8px;\n}\n.social-share a i[data-v-3223b5f2] {\n  font-size: 32px;\n}\n@media screen and (max-width: 309px) {\n.result .danger[data-v-3223b5f2] {\n    font-size: 1.1rem;\n}\n.result .text[data-v-3223b5f2] {\n    font-size: 16px;\n    line-height: 18px;\n}\n.result .text .lite[data-v-3223b5f2] {\n    font-size: 14px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".result[data-v-3223b5f2] {\n  width: 100%;\n  max-width: 159px;\n  margin: 10% auto 0px;\n  position: relative;\n}\n.result .danger[data-v-3223b5f2] {\n  position: absolute;\n  top: 33px;\n  left: 50%;\n  transform: translateX(-50%);\n  color: #ec4141;\n  font-size: 1.2rem;\n  z-index: 9;\n}\n.result .text[data-v-3223b5f2] {\n  z-index: 9;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -39%);\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-size: 18px;\n  line-height: 23px;\n}\n.result .text .lite[data-v-3223b5f2] {\n  font-size: 16px;\n  color: rgba(255, 255, 255, 0.8);\n}\n.min-h-70[data-v-3223b5f2] {\n  min-height: 70px;\n}\nsvg[data-v-3223b5f2] {\n  transform: rotateY(-360deg) rotateZ(-90deg);\n}\nsvg g#circle_3 circle[data-v-3223b5f2] {\n  stroke-dasharray: 400px;\n  stroke-dashoffset: 0px;\n  stroke-linecap: round;\n  stroke-width: 9px;\n  -webkit-animation: countdown-data-v-3223b5f2 1.4s linear forwards;\n          animation: countdown-data-v-3223b5f2 1.4s linear forwards;\n}\n@-webkit-keyframes countdown-data-v-3223b5f2 {\nfrom {\n    stroke-dashoffset: 400px;\n}\nto {\n    stroke-dashoffset: 0px;\n}\n}\n@keyframes countdown-data-v-3223b5f2 {\nfrom {\n    stroke-dashoffset: 400px;\n}\nto {\n    stroke-dashoffset: 0px;\n}\n}\n.social-share[data-v-3223b5f2] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.social-share .title[data-v-3223b5f2] {\n  font-size: 1rem;\n}\n.social-share .list[data-v-3223b5f2] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: relative;\n}\n.social-share .list a[data-v-3223b5f2] {\n  text-decoration: none;\n  margin: 6px;\n  color: #fff;\n}\n.social-share .list .icon[data-v-3223b5f2] {\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  width: 32px;\n  height: 32px;\n  color: #fff;\n  border-radius: 4px;\n}\n.social-share .list .more-btn[data-v-3223b5f2] {\n  cursor: pointer;\n  background-color: #fff;\n  color: #000;\n  margin: 6px 0px 6px 6px;\n}\n.social-share .list .popup-list[data-v-3223b5f2] {\n  position: absolute;\n  bottom: 51px;\n  right: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  justify-content: flex-end;\n  align-items: center;\n  padding: 8px;\n  background-color: #fff;\n  border-radius: 6px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);\n  width: 100%;\n}\n.social-share .list .popup-list[data-v-3223b5f2]::before {\n  content: \"\";\n  position: absolute;\n  bottom: -7px;\n  right: 9px;\n  background-color: #fff;\n  width: 16px;\n  height: 8px;\n  -webkit-clip-path: polygon(0 0, 50% 100%, 100% 0);\n          clip-path: polygon(0 0, 50% 100%, 100% 0);\n}\n.social-share .list .popup-list a[data-v-3223b5f2] {\n  flex: 32px;\n  margin: 0px;\n}\n@media screen and (max-width: 309px) {\n.result .danger[data-v-3223b5f2] {\n    font-size: 1.1rem;\n}\n.result .text[data-v-3223b5f2] {\n    font-size: 16px;\n    line-height: 18px;\n}\n.result .text .lite[data-v-3223b5f2] {\n    font-size: 14px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -531,88 +542,117 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "social-share" },
-                    [
-                      _c(
-                        "ShareNetwork",
-                        {
-                          staticClass: "fb",
-                          attrs: {
-                            network: "facebook",
-                            url: _vm.meta.url,
-                            title: _vm.meta.title,
-                            description: _vm.meta.description,
-                            quote:
-                              "I took my lungs test and this my result " +
-                              _vm.f_result.result +
-                              " SpO2",
-                            media: _vm.meta.media
-                          }
-                        },
-                        [_c("i", { staticClass: "fab fa-facebook-square" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "ShareNetwork",
-                        {
-                          staticClass: "tw",
-                          attrs: {
-                            network: "twitter",
-                            url: _vm.meta.url,
-                            title: _vm.meta.title,
-                            description: _vm.meta.description,
-                            quote:
-                              "I took my lungs test and this my result " +
-                              _vm.f_result.result +
-                              " SpO2",
-                            media: _vm.meta.media
-                          }
-                        },
-                        [_c("i", { staticClass: "fab fa-twitter-square" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "ShareNetwork",
-                        {
-                          staticClass: "li",
-                          attrs: {
-                            network: "linkedIn",
-                            url: _vm.meta.url,
-                            title: _vm.meta.title,
-                            description: _vm.meta.description,
-                            quote:
-                              "I took my lungs test and this my result " +
-                              _vm.f_result.result +
-                              " SpO2",
-                            media: _vm.meta.media
-                          }
-                        },
-                        [_c("i", { staticClass: "fab fa-linkedin" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "ShareNetwork",
-                        {
-                          staticClass: "wa",
-                          attrs: {
-                            network: "WhatsApp",
-                            url: _vm.meta.url,
-                            title: _vm.meta.title,
-                            description: _vm.meta.description,
-                            quote:
-                              "I took my lungs test and this my result " +
-                              _vm.f_result.result +
-                              " SpO2",
-                            media: _vm.meta.media
-                          }
-                        },
-                        [_c("i", { staticClass: "fab fa-whatsapp-square" })]
+                  _c("div", { staticClass: "social-share" }, [
+                    _c("div", { staticClass: "title" }, [
+                      _vm._v(
+                        "\n                        Share on:\n                    "
                       )
-                    ],
-                    1
-                  ),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "list" },
+                      [
+                        _vm._l(_vm.shareList, function(item, index) {
+                          return [
+                            index < 3
+                              ? _c(
+                                  "ShareNetwork",
+                                  {
+                                    key: index,
+                                    class: item.name,
+                                    attrs: {
+                                      network: item.name,
+                                      url: _vm.meta.url,
+                                      title: _vm.meta.title,
+                                      description: _vm.meta.description,
+                                      quote:
+                                        "I took my lungs test and this my result " +
+                                        _vm.f_result.result +
+                                        " SpO2",
+                                      media: _vm.meta.media
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "icon",
+                                      style:
+                                        "background-color: " +
+                                        item.bColor +
+                                        ";",
+                                      domProps: { innerHTML: _vm._s(item.icon) }
+                                    })
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "icon more-btn",
+                            on: {
+                              click: function($event) {
+                                _vm.more = !_vm.more
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-ellipsis-h" })]
+                        ),
+                        _vm._v(" "),
+                        _c("transition", { attrs: { name: "fade" } }, [
+                          _vm.more
+                            ? _c(
+                                "div",
+                                { staticClass: "popup-list" },
+                                [
+                                  _vm._l(_vm.shareList, function(item, index) {
+                                    return [
+                                      index > 2
+                                        ? _c(
+                                            "ShareNetwork",
+                                            {
+                                              key: index,
+                                              class: item.name,
+                                              attrs: {
+                                                network: item.name,
+                                                url: _vm.meta.url,
+                                                title: _vm.meta.title,
+                                                description:
+                                                  _vm.meta.description,
+                                                quote:
+                                                  "I took my lungs test and this my result " +
+                                                  _vm.f_result.result +
+                                                  " SpO2",
+                                                media: _vm.meta.media
+                                              }
+                                            },
+                                            [
+                                              _c("span", {
+                                                staticClass: "icon",
+                                                style:
+                                                  "background-color: " +
+                                                  item.bColor +
+                                                  ";",
+                                                domProps: {
+                                                  innerHTML: _vm._s(item.icon)
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  })
+                                ],
+                                2
+                              )
+                            : _vm._e()
+                        ])
+                      ],
+                      2
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "a",

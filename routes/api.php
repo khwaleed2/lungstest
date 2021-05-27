@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\MetaDataController;
+use App\Http\Controllers\SocialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +28,10 @@ Route::get('/results', [ResultsController::class, 'getResults']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/test', function () {
-        return 'working';
-    });
+
+    Route::post('/update/email', [AuthController::class, 'updateEmail']);
+    Route::post('/update/password', [AuthController::class, 'updatePassword']);
+
 
     Route::post('/dis-save', [DisclaimerController::class, 'saveDisclaimers']);
     Route::delete('/dis-delete/{id}', [DisclaimerController::class, 'deleteDisclaimers']);
@@ -43,6 +45,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/get-metaData', [MetaDataController::class, 'getMeta']);
     Route::post('/save-og', [MetaDataController::class, 'saveOG']);
     Route::post('/save-analytics', [MetaDataController::class, 'saveAnalytics']);
+
+    Route::get('/socialList', [SocialController::class, 'getList']);
+    Route::post('/add-remove-social', [SocialController::class, 'addRemove']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

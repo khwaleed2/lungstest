@@ -96,58 +96,66 @@
                         {{ cardText }}
                     </div>
                     <div class="social-share">
-                        <ShareNetwork
-                            network="facebook"
-                            class="fb"
-                            :url="meta.url"
-                            :title="meta.title"
-                            :description="meta.description"
-                            :quote="
-                                `I took my lungs test and this my result ${f_result.result} SpO2`
-                            "
-                            :media="meta.media"
-                        >
-                            <i class="fab fa-facebook-square"></i>
-                        </ShareNetwork>
-                        <ShareNetwork
-                            network="twitter"
-                            class="tw"
-                            :url="meta.url"
-                            :title="meta.title"
-                            :description="meta.description"
-                            :quote="
-                                `I took my lungs test and this my result ${f_result.result} SpO2`
-                            "
-                            :media="meta.media"
-                        >
-                            <i class="fab fa-twitter-square"></i>
-                        </ShareNetwork>
-                        <ShareNetwork
-                            network="linkedIn"
-                            class="li"
-                            :url="meta.url"
-                            :title="meta.title"
-                            :description="meta.description"
-                            :quote="
-                                `I took my lungs test and this my result ${f_result.result} SpO2`
-                            "
-                            :media="meta.media"
-                        >
-                            <i class="fab fa-linkedin"></i>
-                        </ShareNetwork>
-                        <ShareNetwork
-                            network="WhatsApp"
-                            class="wa"
-                            :url="meta.url"
-                            :title="meta.title"
-                            :description="meta.description"
-                            :quote="
-                                `I took my lungs test and this my result ${f_result.result} SpO2`
-                            "
-                            :media="meta.media"
-                        >
-                            <i class="fab fa-whatsapp-square"></i>
-                        </ShareNetwork>
+                        <div class="title">
+                            Share on:
+                        </div>
+                        <div class="list">
+                            <template v-for="(item, index) in shareList">
+                                <ShareNetwork
+                                    :network="item.name"
+                                    :key="index"
+                                    v-if="index < 3"
+                                    :class="item.name"
+                                    :url="meta.url"
+                                    :title="meta.title"
+                                    :description="meta.description"
+                                    :quote="
+                                        `I took my lungs test and this my result ${f_result.result} SpO2`
+                                    "
+                                    :media="meta.media"
+                                >
+                                    <span
+                                        class="icon"
+                                        :style="
+                                            `background-color: ${item.bColor};`
+                                        "
+                                        v-html="item.icon"
+                                    ></span>
+                                </ShareNetwork>
+                            </template>
+                            <span @click="more = !more" class="icon more-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </span>
+                            <transition name="fade">
+                                <div v-if="more" class="popup-list">
+                                    <template
+                                        v-for="(item, index) in shareList"
+                                    >
+                                        <ShareNetwork
+                                            :network="item.name"
+                                            :key="index"
+                                            v-if="index > 2"
+                                            :class="item.name"
+                                            :url="meta.url"
+                                            :title="meta.title"
+                                            :description="meta.description"
+                                            :quote="
+                                                `I took my lungs test and this my result ${f_result.result} SpO2`
+                                            "
+                                            :media="meta.media"
+                                        >
+                                            <span
+                                                class="icon"
+                                                :style="
+                                                    `background-color: ${item.bColor};`
+                                                "
+                                                v-html="item.icon"
+                                            ></span>
+                                        </ShareNetwork>
+                                    </template>
+                                </div>
+                            </transition>
+                        </div>
                     </div>
                     <a class="footer-btn-lite" href="#" @click="tryAgain"
                         >Try again</a
@@ -165,6 +173,7 @@ export default {
     data() {
         return {
             show: false,
+            more: false,
             results: [],
             inhale_dura: null,
             hold_dura: null,
@@ -194,6 +203,9 @@ export default {
         },
         f_result() {
             return this.$store.getters.getResult;
+        },
+        shareList() {
+            return this.$store.getters.getData.ShareList;
         }
     },
 
@@ -210,7 +222,6 @@ export default {
         getMetaData() {
             axios({ url: "get-metaData", method: "GET" })
                 .then(res => {
-                    console.log(res.data.metaData);
                     this.meta.title = res.data.metaData.title;
                     this.meta.url = res.data.metaData.url;
                     this.meta.description = res.data.metaData.description;
@@ -288,15 +299,72 @@ svg g#circle_3 circle {
 
 .social-share {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
-    a {
-        color: #fff;
-        margin: 8px;
+    .title {
+        font-size: 1rem;
+    }
 
-        i {
-            font-size: 32px;
+    .list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        a {
+            text-decoration: none;
+            margin: 6px;
+            color: #fff;
+        }
+
+        .icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .more-btn {
+            cursor: pointer;
+            background-color: #fff;
+            color: #000;
+            margin: 6px 0px 6px 6px;
+        }
+
+        .popup-list {
+            position: absolute;
+            bottom: 51px;
+            right: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -7px;
+                right: 9px;
+                background-color: #fff;
+                width: 16px;
+                height: 8px;
+                clip-path: polygon(0 0, 50% 100%, 100% 0);
+            }
+
+            a {
+                flex: 32px;
+                margin: 0px;
+            }
         }
     }
 }

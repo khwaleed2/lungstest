@@ -13,9 +13,11 @@ import "animate.css";
 import VueTheMask from 'vue-the-mask';
 Vue.use(VueTheMask);
 
-import VueSocialSharing from 'vue-social-sharing'
-
+import VueSocialSharing from 'vue-social-sharing';
 Vue.use(VueSocialSharing);
+
+import Notifications from 'vue-notification';
+Vue.use(Notifications);
 
 const token = localStorage.getItem("token");
 if (token) {

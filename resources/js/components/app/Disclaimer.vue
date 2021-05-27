@@ -21,7 +21,9 @@
             <div class="app-footer">
                 <div class="footer-card">
                     <div class="card-info">
-                        <i class="card-icon"></i>
+                        <i class="card-icon">
+                            <i class="fas fa-smoking"></i>
+                        </i>
                         <span>I'm a smoker</span>
                     </div>
                     <div class="card-actions">
@@ -56,7 +58,6 @@ export default {
         getDisclaimers() {
             axios({ url: "disclaimers", method: "GET" })
                 .then(res => {
-                    console.log(res.data);
                     this.disclaimers = res.data.disclaimers;
                     this.cardText = res.data.DisclaimerCardText.text;
                 })
@@ -133,6 +134,11 @@ export default {
             justify-content: center;
             border-radius: 100%;
             margin-right: 10px;
+
+            i {
+                font-size: 14px;
+                color: #000;
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tab-pane fade show"
+        class="tab-pane fade show mb-5"
         :class="{ active: activePage === pageName }"
         :id="`v-pills-${pageName}`"
         role="tabpanel"
@@ -10,10 +10,10 @@
             <div class="form-row">
                 <div class="col-12">
                     <div class="form-group">
-                        <label for="cardtext">Card Text</label>
+                        <label for="cardtexta">Card Text</label>
                         <textarea
                             class="form-control"
-                            id="cardtext"
+                            id="cardtexta"
                             rows="3"
                             v-model="cardText"
                         ></textarea>
@@ -34,7 +34,7 @@
                     <h4 class="mb-4">Disclaimers</h4>
 
                     <div class="row align-items-center mb-3">
-                        <div class="col-1 position-relative">
+                        <div class="col-lg-1 col-sm-2 col-2 position-relative">
                             <div class="add-icon-btn">
                                 <input
                                     :id="`icon`"
@@ -147,7 +147,11 @@ export default {
                     this.cardText = res.data.DisclaimerCardText.text;
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -158,10 +162,19 @@ export default {
             axios({ url: "disCardText-save", data: disData, method: "POST" })
                 .then(res => {
                     this.loading1 = false;
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
                     this.loading1 = false;
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -180,6 +193,11 @@ export default {
 
                     this.loading2 = false;
                     this.getDisclaimers();
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
                     this.loading2 = false;
@@ -191,9 +209,18 @@ export default {
             axios({ url: `dis-delete/${id}`, method: "DELETE" })
                 .then(res => {
                     this.getDisclaimers();
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         }
     }
@@ -237,7 +264,7 @@ export default {
 form {
     width: 100%;
     max-width: 600px;
-    margin: auto;
+    margin-right: auto;
 }
 
 .disclaimer-list {
@@ -249,7 +276,7 @@ form {
     scrollbar-width: none;
     width: 100%;
     max-width: 600px;
-    margin: 20px auto 0px;
+    margin: 20px auto 0px 0px;
 
     &::-webkit-scrollbar {
         display: none;

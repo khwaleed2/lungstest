@@ -305,7 +305,6 @@ __webpack_require__.r(__webpack_exports__);
       this["int"] = setInterval(function () {
         if (_this2.holdBreathDuration > _this2.time) {
           _this2.time = ++_this2.time;
-          console.log(_this2.time);
         } else {
           _this2.stopTiming();
         }
@@ -439,6 +438,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "disclaimer",
   data: function data() {
@@ -458,7 +459,6 @@ __webpack_require__.r(__webpack_exports__);
         url: "disclaimers",
         method: "GET"
       }).then(function (res) {
-        console.log(res.data);
         _this.disclaimers = res.data.disclaimers;
         _this.cardText = res.data.DisclaimerCardText.text;
       })["catch"](function (err) {
@@ -594,7 +594,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".disclaimer-list[data-v-caefe618] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  height: calc(100vh - 350px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.disclaimer-list[data-v-caefe618]::-webkit-scrollbar {\n  display: none;\n}\n.disclaimer-list li[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n  width: 100%;\n  max-width: 15px;\n}\n.footer-card[data-v-caefe618] {\n  width: 100%;\n  background-color: #2b60b5;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 12px;\n  border-radius: 15px;\n}\n.footer-card .card-info[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-info .card-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.footer-card .card-actions .switch-btn[data-v-caefe618] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-actions .switch-btn input[data-v-caefe618] {\n  display: none;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618] {\n  background-color: #629efe;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618]::before {\n  transform: translateX(21px);\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618] {\n  position: relative;\n  display: inline-block;\n  width: 45px;\n  height: 25px;\n  background-color: #797c9b;\n  border-radius: 40px;\n  transition: all 0.3s;\n  cursor: pointer;\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 25px;\n  height: 25px;\n  background-color: #fff;\n  border-radius: 100%;\n  transition: all 0.3s;\n}\n@media screen and (max-width: 309px) {\n.disclaimer-list li[data-v-caefe618] {\n    font-size: 14px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n    width: 30px;\n    height: 30px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n    max-width: 12px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".disclaimer-list[data-v-caefe618] {\n  list-style: none;\n  margin: 0px;\n  padding: 0px;\n  height: calc(100vh - 350px);\n  overflow-y: auto;\n  -ms-overflow-style: none;\n  /* IE and Edge */\n  scrollbar-width: none;\n}\n.disclaimer-list[data-v-caefe618]::-webkit-scrollbar {\n  display: none;\n}\n.disclaimer-list li[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n  width: 100%;\n  max-width: 15px;\n}\n.footer-card[data-v-caefe618] {\n  width: 100%;\n  background-color: #2b60b5;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 12px;\n  border-radius: 15px;\n}\n.footer-card .card-info[data-v-caefe618] {\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-info .card-icon[data-v-caefe618] {\n  width: 32px;\n  height: 32px;\n  display: inline-block;\n  background-color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 100%;\n  margin-right: 10px;\n}\n.footer-card .card-info .card-icon i[data-v-caefe618] {\n  font-size: 14px;\n  color: #000;\n}\n.footer-card .card-actions .switch-btn[data-v-caefe618] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.footer-card .card-actions .switch-btn input[data-v-caefe618] {\n  display: none;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618] {\n  background-color: #629efe;\n}\n.footer-card .card-actions .switch-btn input:checked ~ .switch[data-v-caefe618]::before {\n  transform: translateX(21px);\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618] {\n  position: relative;\n  display: inline-block;\n  width: 45px;\n  height: 25px;\n  background-color: #797c9b;\n  border-radius: 40px;\n  transition: all 0.3s;\n  cursor: pointer;\n}\n.footer-card .card-actions .switch-btn .switch[data-v-caefe618]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 25px;\n  height: 25px;\n  background-color: #fff;\n  border-radius: 100%;\n  transition: all 0.3s;\n}\n@media screen and (max-width: 309px) {\n.disclaimer-list li[data-v-caefe618] {\n    font-size: 14px;\n}\n.disclaimer-list li .list-icon[data-v-caefe618] {\n    width: 30px;\n    height: 30px;\n}\n.disclaimer-list li .list-icon img[data-v-caefe618] {\n    max-width: 12px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1490,7 +1490,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "app-footer" }, [
       _c("div", { staticClass: "footer-card" }, [
         _c("div", { staticClass: "card-info" }, [
-          _c("i", { staticClass: "card-icon" }),
+          _c("i", { staticClass: "card-icon" }, [
+            _c("i", { staticClass: "fas fa-smoking" })
+          ]),
           _vm._v(" "),
           _c("span", [_vm._v("I'm a smoker")])
         ]),

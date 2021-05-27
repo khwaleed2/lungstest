@@ -1,6 +1,6 @@
 <template>
     <div
-        class="nav flex-column nav-pills"
+        class="nav flex-md-column justify-content-center mb-4 nav-pills"
         id="v-pills-tab"
         role="tablist"
         aria-orientation="vertical"
@@ -35,15 +35,21 @@ export default {
                     slug: "disclaimer",
                     name: "Disclaimer"
                 },
-
                 {
                     slug: "settings",
                     name: "App Settings"
                 },
-
                 {
                     slug: "metaData",
                     name: "Meta Data"
+                },
+                {
+                    slug: "socialShare",
+                    name: "Social Share"
+                },
+                {
+                    slug: "adminSettings",
+                    name: "Admin Settings"
                 }
             ]
         };

@@ -17,14 +17,17 @@ class PagesController extends Controller
     {
         $data = MetaData::first();
 
-        \Meta::set('title', $data->title);
-        \Meta::set('url', $data->url);
-        \Meta::set('description', $data->description);
-        \Meta::set('type', $data->type);
-        \Meta::set('twitter:card', $data->card);
-        \Meta::set('image', asset($data->image));
-
-        $analytics = $data->analytics;
+        if ($data) {
+            \Meta::set('title', $data->title);
+            \Meta::set('url', $data->url);
+            \Meta::set('description', $data->description);
+            \Meta::set('type', $data->type);
+            \Meta::set('twitter:card', $data->card);
+            \Meta::set('image', asset($data->image));
+            $analytics = $data->analytics;
+        } else {
+            $analytics = '';
+        }
         return view('app', ['analy' => $analytics]);
     }
 }

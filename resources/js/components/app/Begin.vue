@@ -228,7 +228,6 @@ export default {
             this.int = setInterval(() => {
                 if (this.holdBreathDuration > this.time) {
                     this.time = ++this.time;
-                    console.log(this.time);
                 } else {
                     this.stopTiming();
                 }

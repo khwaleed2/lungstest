@@ -126,7 +126,6 @@ export default {
         getMetaData() {
             axios({ url: "get-metaData", method: "GET" })
                 .then(res => {
-                    console.log(res.data.metaData);
                     this.title = res.data.metaData.title;
                     this.url = res.data.metaData.url;
                     this.desc = res.data.metaData.description;
@@ -136,7 +135,11 @@ export default {
                     this.analy = res.data.metaData.analytics;
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -152,10 +155,19 @@ export default {
             axios({ url: "save-og", data: disData, method: "POST" })
                 .then(res => {
                     this.loading1 = false;
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
                     this.loading1 = false;
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -166,10 +178,19 @@ export default {
             axios({ url: "save-analytics", data: disData, method: "POST" })
                 .then(res => {
                     this.loading2 = false;
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
                     this.loading2 = false;
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         }
     }

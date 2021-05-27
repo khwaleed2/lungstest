@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tab-pane fade show"
+        class="tab-pane fade show mb-5"
         :class="{ active: activePage === pageName }"
         :id="`v-pills-${pageName}`"
         role="tabpanel"
@@ -9,7 +9,7 @@
         <h4>Breath settings</h4>
         <form @submit.prevent="saveTimes">
             <div class="form-row">
-                <div class="col-3">
+                <div class="col-lg-3 col-md-4 col">
                     <div class="form-group">
                         <label for="inhale">Inhale Duration</label>
                         <the-mask
@@ -21,7 +21,7 @@
                         />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-md-4 col">
                     <div class="form-group">
                         <label for="holdBreath">Hold breath Duration</label>
                         <the-mask
@@ -45,7 +45,7 @@
         <h4>Results settings</h4>
         <form @submit.prevent="saveResults">
             <div class="form-row">
-                <div class="col-2">
+                <div class="col-lg-2 col-sm-3 col">
                     <div class="form-group">
                         <label for="condition">Condition</label>
                         <select
@@ -58,7 +58,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 col-sm-3 col">
                     <div class="form-group">
                         <label for="sec">Seconds</label>
                         <the-mask
@@ -70,13 +70,13 @@
                         />
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 col-sm-3 col">
                     <div class="form-group">
                         <label for="resu">Result</label>
                         <the-mask
                             type="text"
                             class="form-control"
-                            :mask="['< ##%', '≈##-##%']"
+                            :mask="['<##%', '≈##-##%']"
                             :masked="true"
                             id="resu"
                             placeholder="≈91-95%"
@@ -84,7 +84,7 @@
                         />
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 col-sm-3">
                     <div class="form-group">
                         <label for="resu" class="mb-2">Critical</label>
                         <br />
@@ -204,10 +204,19 @@ export default {
             axios({ url: "save-times", data: disData, method: "POST" })
                 .then(res => {
                     this.loading1 = false;
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
-                    console.log(err);
                     this.loading1 = false;
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -225,9 +234,18 @@ export default {
                     this.result = "";
                     this.critical = "no";
                     this.getResults();
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                     this.loading2 = false;
                 });
         },
@@ -241,7 +259,11 @@ export default {
                     this.hold_dura = res.data.resultData.hold_dura;
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         },
 
@@ -252,9 +274,18 @@ export default {
             axios({ url: "cardText-save", data: disData, method: "POST" })
                 .then(res => {
                     this.loading3 = false;
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                     this.loading3 = false;
                 });
         },
@@ -263,9 +294,18 @@ export default {
             axios({ url: `del-result/${id}`, method: "DELETE" })
                 .then(res => {
                     this.getResults();
+                    this.$notify({
+                        type: "success",
+                        title: res.data.success,
+                        duration: 6000
+                    });
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$notify({
+                        type: "error",
+                        title: err.response.data.message,
+                        duration: 6000
+                    });
                 });
         }
     }

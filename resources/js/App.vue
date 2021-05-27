@@ -1,5 +1,6 @@
 <template>
     <div class="app">
+        <notifications position="bottom right" />
         <vue-page-transition>
             <router-view />
         </vue-page-transition>

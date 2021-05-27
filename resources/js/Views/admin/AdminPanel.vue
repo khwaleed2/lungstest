@@ -4,14 +4,16 @@
 
         <div class="container mt-5">
             <div class="row">
-                <div class="col-2">
+                <div class="col-lg-2 col-md-3">
                     <side-nav />
                 </div>
-                <div class="col-10">
+                <div class="col-lg-10 col-md-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         <disclaimer />
                         <settings />
                         <meta-data />
+                        <social-share />
+                        <admin-settings />
                     </div>
                 </div>
             </div>
@@ -25,6 +27,8 @@ import MetaData from "../../components/admin/MetaData.vue";
 import Settings from "../../components/admin/Settings.vue";
 import Navbar from "../../components/admin/layout/Navbar.vue";
 import SideNav from "../../components/admin/layout/SideNav.vue";
+import SocialShare from "../../components/admin/SocialShare.vue";
+import AdminSettings from "../../components/admin/AdminSettings.vue";
 
 export default {
     name: "admin-panel",
@@ -33,7 +37,9 @@ export default {
         SideNav,
         Disclaimer,
         MetaData,
-        Settings
+        Settings,
+        SocialShare,
+        AdminSettings
     }
 };
 </script>
